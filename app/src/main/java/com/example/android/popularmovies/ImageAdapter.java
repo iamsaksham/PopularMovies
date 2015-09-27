@@ -13,14 +13,16 @@ import com.squareup.picasso.Picasso;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private String[] posterPaths;
 
     //constructor
-    public ImageAdapter(Context c) {
+    public ImageAdapter(Context c, String[] recievedPosterPaths) {
         mContext = c;
+        posterPaths = recievedPosterPaths;
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return posterPaths.length;
     }
 
     public Object getItem(int position) {
@@ -44,7 +46,9 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        String url = "http://image.tmdb.org/t/p/w500//nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg";
+        String url = "http://image.tmdb.org/t/p/w500/" + posterPaths[position];
+
+
         //imageView.setImageResource(mThumbIds[position]);
         Picasso.with(this.mContext)
                 .load(url)
